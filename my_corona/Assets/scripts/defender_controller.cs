@@ -9,6 +9,7 @@ public class defender_controller : MonoBehaviour
     public float looking_to;
     private Vector3 _centre;
     private float _angle;
+    private static int hp = 3;
  
     // Start is called before the first frame update
     private void Start()
@@ -27,5 +28,15 @@ public class defender_controller : MonoBehaviour
         float angel = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angel, Vector3.forward);    
         looking_to = transform.rotation.z;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(hp);
+        hp--;
+        if (hp <= 0)
+        {
+            Debug.Log("GAME OVER");
+            Application.Quit();
+        }
     }
 }

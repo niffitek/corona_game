@@ -11,6 +11,7 @@ public class enemy_movement : MonoBehaviour
     private Vector3 move_vec = new Vector3(0.00f, 0.00f, 0);
     private float speed = 0.001f;
     public GameObject player;
+    //public Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +31,13 @@ public class enemy_movement : MonoBehaviour
                 transform.position = new Vector3(x - 10, y - 10, -2);
         start_pos = transform.position;
         move_vec = get_moving_vec();
+        //rb = GetComponent<Rigidbody>();
     }
-
+    /*void EnableRagdoll()
+    {
+        rb.isKinematic = false;
+        rb.detectCollisions = true;
+    }*/
     // Update is called once per frame
     void Update()
     {
@@ -65,4 +71,17 @@ public class enemy_movement : MonoBehaviour
         int ret = rand.Next(min, max);
         return(ret);  
     }
+    /*private void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("hit detected!");
+    }*/
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        valid = false;
+        Destroy(gameObject);
+    }
+    /*private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(");
+    }*/
 }
