@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class enemy_movement : MonoBehaviour
 {
-    public bool isClone = false;
+    public bool isClone = true;
     private Vector3 start_pos = new Vector3(100, 100, 0);
     private Vector3 move_vec = new Vector3(0.00f, 0.00f, 0);
-    private float speed = 1f;
+    private float speed = 10f;
     public GameObject player;
     // Start is called before the first frame update
     void Start()
@@ -40,7 +40,7 @@ public class enemy_movement : MonoBehaviour
 
     public Vector3 get_moving_vec()
     {
-        float rad = player.GetComponent<player_controler>().Radius;
+        float rad = player.GetComponent<defender_controller>().Rad;
         int rnd = RandomNumber(1, 89);
         var ret = new Vector3(Mathf.Sin(rnd) * rad - transform.position.x, Mathf.Cos(rnd) * rad - transform.position.y, 0) * 0.0001f;
         return (ret);
