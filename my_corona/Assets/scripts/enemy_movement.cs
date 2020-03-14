@@ -38,8 +38,6 @@ public class enemy_movement : MonoBehaviour
         if (isClone == true) {
                 next_move = Time.time + speed;
                 transform.position += move_vec * 10;
-                Debug.Log(transform.position.x);
-                Debug.Log(transform.position.y);
         }
         if (valid == false) {
             if ((-10 < transform.position.x  && transform.position.x < 10) && (-10 < transform.position.y && transform.position.y  < 10)) {
