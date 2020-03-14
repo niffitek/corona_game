@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class defender_controller : MonoBehaviour
 {
+    public GameObject projectile;
     private float RotateSpeed = 3f;
     public float Rad = 3f;
     public float looking_to;
@@ -21,13 +22,34 @@ public class defender_controller : MonoBehaviour
     private void Update()
     {
         _angle += RotateSpeed * Time.deltaTime;
-
         var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * Rad;
         transform.position = _centre + offset;
         Vector3 dir = _centre - transform.position;
         float angel = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angel, Vector3.forward);    
         looking_to = transform.rotation.z;
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            shoot();
+            Debug.Log("Pressed left click.");
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            RotateSpeed *= -1;
+            Debug.Log("Pressed right click.");
+        }
+
+        if (Input.GetMouseButtonUp(2))
+        {
+            Debug.Log("Pressed middle click.");
+        }
+    }
+    private void shoot()
+    {
+        GameObject go = (GameObject)Instantiate(projectile, transform.position, Quaternion.identity);
+        go.GetComponent<prjectile>().isClone = true;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
