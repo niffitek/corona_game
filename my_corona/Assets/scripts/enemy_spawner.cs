@@ -6,7 +6,7 @@ public class enemy_spawner : MonoBehaviour
 {
     public GameObject enemy;
 
-    public float spawnRate;
+    public float spawnRate = 1f;
     private float nextSpawn = 0f;
 
     // Start is called before the first frame update
@@ -22,7 +22,7 @@ public class enemy_spawner : MonoBehaviour
         {
             nextSpawn = Time.time + spawnRate;
             GameObject go = (GameObject)Instantiate(enemy,
-            new Vector3(Random.Range(-9.0f, 9.0f), 6, 10), Quaternion.identity);
+            new Vector3(Random.Range(-9.0f, 9.0f), 6, -2), Quaternion.identity);
             go.GetComponent<enemy_movement>().isClone = true;
         }
     }
