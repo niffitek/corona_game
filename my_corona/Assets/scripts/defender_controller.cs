@@ -24,7 +24,7 @@ public class defender_controller : MonoBehaviour
         var offset = new Vector3(Mathf.Sin(_angle), Mathf.Cos(_angle), 0) * Rad;
         transform.position = _centre + offset;
         Vector3 dir = _centre - transform.position;
-        float angel = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float angel = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angel, Vector3.forward);    
         looking_to = transform.rotation.z;
 

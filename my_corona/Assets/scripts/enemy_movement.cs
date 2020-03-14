@@ -16,18 +16,18 @@ public class enemy_movement : MonoBehaviour
     {
         valid = false;
         next_move = Time.time;
-        start_pos = new Vector3(100, 100, 0);
+        start_pos = new Vector3(100, 100, -2);
         int x = UnityEngine.Random.Range(-10, 10);
         int y = UnityEngine.Random.Range(-10, 10);
         if (x >= 0 && y >= 0)  
-            transform.position = new Vector3(x + 10, y + 10 ,0);
+            transform.position = new Vector3(x + 10, y + 10 , -2);
         else if (x >= 0)
-            transform.position = new Vector3(x + 10, y - 10, 0);
+            transform.position = new Vector3(x + 10, y - 10, -2);
         else
             if (x >= 0)
-                transform.position = new Vector3(x + 10, y - 10, 0);
+                transform.position = new Vector3(x + 10, y - 10, -2);
             else
-                transform.position = new Vector3(x - 10, y - 10, 0);
+                transform.position = new Vector3(x - 10, y - 10, -2);
         start_pos = transform.position;
         move_vec = get_moving_vec();
     }
