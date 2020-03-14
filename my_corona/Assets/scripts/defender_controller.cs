@@ -6,7 +6,7 @@ public class defender_controller : MonoBehaviour
 {
     private float RotateSpeed = 3f;
     public float Rad = 3f;
- 
+    public float looking_to;
     private Vector3 _centre;
     private float _angle;
  
@@ -26,5 +26,6 @@ public class defender_controller : MonoBehaviour
         Vector3 dir = _centre - transform.position;
         float angel = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
         transform.rotation = Quaternion.AngleAxis(angel, Vector3.forward);    
+        looking_to = transform.rotation.z;
     }
 }
