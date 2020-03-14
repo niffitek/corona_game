@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class enemy_movement : MonoBehaviour
 {
+    public bool valid;
     private float next_move = 0f;
     public bool isClone;
     private Vector3 start_pos = new Vector3(100, 100, 0);
@@ -13,10 +14,11 @@ public class enemy_movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        valid = false;
         next_move = Time.time;
         start_pos = new Vector3(100, 100, 0);
-        int x = RandomNumber(0, 20) - 10;
-        int y = RandomNumber(0, 20) - 10;
+        int x = UnityEngine.Random.Range(-10, 10);
+        int y = UnityEngine.Random.Range(-10, 10);
         if (x >= 0 && y >= 0)  
             transform.position = new Vector3(x + 10, y + 10 ,0);
         else if (x >= 0)
@@ -38,6 +40,17 @@ public class enemy_movement : MonoBehaviour
                 transform.position += move_vec * 10;
                 Debug.Log(transform.position.x);
                 Debug.Log(transform.position.y);
+        }
+        if (valid == false) {
+            if ((-10 < transform.position.x  && transform.position.x < 10) && (-10 < transform.position.y && transform.position.y  < 10)) {
+                valid = true;
+            }
+        }
+        if (valid == true) {
+            if (!((-10 < transform.position.x  && transform.position.x < 10) && (-10 < transform.position.y && transform.position.y  < 10))) {
+                valid = false;
+                Destroy(gameObject);
+            }
         }
     }
 
