@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class enemy_movement : MonoBehaviour
 {
-    public bool isClone = true;
+    private float next_move = 0f;
+    public bool isClone;
     private Vector3 start_pos = new Vector3(100, 100, 0);
     private Vector3 move_vec = new Vector3(0.00f, 0.00f, 0);
-    private float speed = 10f;
+    private float speed = 0.001f;
     public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
+        next_move = Time.time;
         start_pos = new Vector3(100, 100, 0);
-        int x = RandomNumber(-10, 10);
-        int y = RandomNumber(-10, 10);
+        int x = RandomNumber(0, 20) - 10;
+        int y = RandomNumber(0, 20) - 10;
         if (x >= 0 && y >= 0)  
             transform.position = new Vector3(x + 10, y + 10 ,0);
         else if (x >= 0)
             transform.position = new Vector3(x + 10, y - 10, 0);
         else
-            if (y >= 0)
-                transform.position = new Vector3(x - 10, y + 10, 0);
+            if (x >= 0)
+                transform.position = new Vector3(x + 10, y - 10, 0);
             else
                 transform.position = new Vector3(x - 10, y - 10, 0);
         start_pos = transform.position;
@@ -32,9 +34,10 @@ public class enemy_movement : MonoBehaviour
     void Update()
     {
         if (isClone == true) {
-            transform.position += move_vec * speed;
-            Debug.Log(transform.position.x);
-            Debug.Log(transform.position.y);
+                next_move = Time.time + speed;
+                transform.position += move_vec * 10;
+                Debug.Log(transform.position.x);
+                Debug.Log(transform.position.y);
         }
     }
 

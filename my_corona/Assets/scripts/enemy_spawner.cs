@@ -5,17 +5,25 @@ using UnityEngine;
 public class enemy_spawner : MonoBehaviour
 {
     public GameObject enemy;
+
+    public float spawnRate;
+    private float nextSpawn = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        spawnRate = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Instantiate at position (0, 0, 0) and zero rotation.
-        GameObject go = (GameObject)Instantiate(enemy, new Vector3(0, 0, 0), Quaternion.identity);
-        go.GetComponent<enemy_movement>().isClone = true;
+        if (Time.time > nextSpawn)
+        {
+            nextSpawn = Time.time + spawnRate;
+            GameObject go = (GameObject)Instantiate(enemy,
+            new Vector3(Random.Range(-9.0f, 9.0f), 6, 10), Quaternion.identity);
+            go.GetComponent<enemy_movement>().isClone = true;
+        }
     }
 }
