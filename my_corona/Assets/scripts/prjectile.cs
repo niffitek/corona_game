@@ -7,11 +7,11 @@ public class prjectile : MonoBehaviour
     public GameObject player;
     
     public bool isClone = false;
-    // Start is called before the first frame update
     public Vector3 startPos;
     public Vector3 direction;
     private float speed = 0.1f;
     private float next_move = 0f;
+    public float range = 100;
     private Vector3 dir = new Vector3(0, 0, 0);
     void Start()
     {
@@ -21,15 +21,15 @@ public class prjectile : MonoBehaviour
         Debug.Log(dir);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isClone == true) {
             if (Time.time > next_move) {
                 next_move = Time.time + 0.05f;
+                dir.z = -2;
                 transform.position += dir * speed;
             }
-            if (!((-10 < transform.position.x  && transform.position.x < 10) && (-10 < transform.position.y && transform.position.y  < 10))) {
+            if (!((-range < transform.position.x  && transform.position.x < range) && (-range < transform.position.y && transform.position.y  < range))) {
                 Destroy(gameObject);
             }
         }

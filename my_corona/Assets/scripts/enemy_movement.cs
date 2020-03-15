@@ -77,6 +77,8 @@ public class enemy_movement : MonoBehaviour
     }*/
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "bullet")
+            FindObjectOfType<safescoretext>().score += 5;
         valid = false;
         Destroy(gameObject);
     }

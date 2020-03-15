@@ -10,7 +10,7 @@ public class defender_controller : MonoBehaviour
     public float looking_to;
     private Vector3 _centre;
     private float _angle;
-    private static int hp = 3;
+    public int hp = 5;
  
     // Start is called before the first frame update
     private void Start()
@@ -50,15 +50,19 @@ public class defender_controller : MonoBehaviour
     {
         GameObject go = (GameObject)Instantiate(projectile, transform.position, Quaternion.identity);
         go.GetComponent<prjectile>().isClone = true;
+        Physics2D.IgnoreCollision(go.GetComponent<Collider2D>(), GetComponent<Collider2D>());
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(hp);
-        hp--;
-        if (hp <= 0)
+        if (collision.gameObject.tag != "bullet")
         {
-            Debug.Log("GAME OVER");
-            Application.Quit();
+            Debug.Log(hp);
+            hp--;
+            if (hp <= 0)
+            {
+                Debug.Log("GAME OVER");
+                Application.Quit();
+            }
         }
     }
 }

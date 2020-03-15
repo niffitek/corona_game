@@ -24,6 +24,7 @@ public class enemy_spawner : MonoBehaviour
             GameObject go = (GameObject)Instantiate(enemy,
             new Vector3(Random.Range(-9.0f, 9.0f), 6, -2), Quaternion.identity);
             go.GetComponent<enemy_movement>().isClone = true;
+            go.SetActive(true);
         }
     }
 }
